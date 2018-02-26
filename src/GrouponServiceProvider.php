@@ -45,7 +45,7 @@ class GrouponServiceProvider extends ServiceProvider
 
         // merge configs
         $this->mergeConfigFrom(
-            __DIR__.'/config.php', 'ibrand.groupon'
+            __DIR__.'/../config/groupon.php', 'ibrand.groupon'
         );
 
 

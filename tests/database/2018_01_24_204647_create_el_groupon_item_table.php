@@ -1,16 +1,21 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
+/*
+ * This file is part of ibrand/groupon.
+ *
+ * (c) iBrand <https://www.ibrand.cc>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateElGrouponItemTable extends Migration
 {
-    
-
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -20,7 +25,7 @@ class CreateElGrouponItemTable extends Migration
             $table->integer('goods_id');     //商品ID
             $table->integer('number');  //成团人数
             $table->integer('manx_number');  //最大成团人数
-            $table->decimal('groupon_price',15,2);  //团购价格
+            $table->decimal('groupon_price', 15, 2);  //团购价格
             $table->tinyInteger('status')->default(0); //参与状态：0 不参与；1 参与
             $table->integer('limit')->default(0);    //限购数量：0 不限购；
             $table->tinyInteger('get_point')->default(0); //是否可获得积分：0 否；1是
@@ -36,12 +41,9 @@ class CreateElGrouponItemTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {
         Schema::drop('el_groupon_item');
     }
-
 }

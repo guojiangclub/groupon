@@ -36,7 +36,7 @@ class GrouponItem extends Model
 
     public function goods()
     {
-        return $this->belongsTo(Goods::class);
+        return $this->belongsTo(config('ibrand.groupon.models.goods'));
     }
 
     public function SpecialType()

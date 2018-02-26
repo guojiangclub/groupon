@@ -30,6 +30,11 @@
       "iBrand\\Component\\Groupon\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "iBrand\\Component\\Groupon\\Test\\": "tests"
+    }
+  },
   "extra": {
     "laravel": {
       "providers": [
