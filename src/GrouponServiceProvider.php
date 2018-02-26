@@ -38,6 +38,6 @@ class GrouponServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->make('ElementVip\ScheduleList')->add(Schedule::class);
+        $this->app->make('iBrand\Scheduling\ScheduleList')->add(Schedule::class);
     }
 }
