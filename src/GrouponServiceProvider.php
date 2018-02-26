@@ -42,11 +42,14 @@ class GrouponServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
         // merge configs
         $this->mergeConfigFrom(
             __DIR__.'/config.php', 'ibrand.groupon'
         );
 
-        $this->app->make('ElementVip\ScheduleList')->add(Schedule::class);
+
+        $this->app->make('iBrand\Scheduling\ScheduleList')->add(Schedule::class);
+
     }
 }
