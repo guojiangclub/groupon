@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace iBrand\Component\Groupon\Models;
+namespace iBrand\Component\Groupon\Test;
 
 use Illuminate\Database\Eloquent\Model;
 

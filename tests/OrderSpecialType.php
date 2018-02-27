@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace iBrand\Component\Groupon\Models;
+namespace iBrand\Component\Groupon\Test;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,7 +23,7 @@ class OrderSpecialType extends Model
 
     public function grouponItem()
     {
-        return $this->belongsTo(GrouponItem::class, 'origin_id', 'id');
+        return $this->belongsTo(\iBrand\Component\Groupon\Models\GrouponItem::class, 'origin_id', 'id');
     }
 
     public function order()

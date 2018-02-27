@@ -41,7 +41,7 @@ class GrouponItem extends Model
 
     public function SpecialType()
     {
-        return $this->hasMany(OrderSpecialType::class, 'origin_id', 'id');
+        return $this->hasMany(config('ibrand.groupon.models.order_special_type'), 'origin_id', 'id');
     }
 
     public function sale()

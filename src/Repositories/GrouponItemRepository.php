@@ -12,8 +12,6 @@
 namespace iBrand\Component\Groupon\Repositories;
 
 use Carbon\Carbon;
-use ElementVip\Component\Order\Models\Order;
-use ElementVip\Component\Product\Models\Goods;
 use iBrand\Component\Groupon\Models\Groupon;
 use iBrand\Component\Groupon\Models\GrouponItem;
 use iBrand\Component\Groupon\Models\GrouponSale;
@@ -144,8 +142,8 @@ class GrouponItemRepository extends BaseRepository
 
     public function getUserGrouponGoodsCountByItemId($groupon_item_id, $user_id)
     {
-        if ($seckill_sale = GrouponSale::where('user_id', $user_id)->where('groupon_item_id', $groupon_item_id)->first()) {
-            return $seckill_sale->quantity;
+        if ($groupon_sale = GrouponSale::where('user_id', $user_id)->where('groupon_item_id', $groupon_item_id)->first()) {
+            return $groupon_sale->quantity;
         }
 
         return 0;

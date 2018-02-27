@@ -12,7 +12,6 @@
 namespace iBrand\Component\Groupon\Repositories;
 
 use Carbon\Carbon;
-use ElementVip\Component\Product\Models\Goods;
 use iBrand\Component\Groupon\Models\Groupon;
 use Prettus\Repository\Eloquent\BaseRepository;
 
@@ -44,11 +43,8 @@ class GrouponRepository extends BaseRepository
             ->where('starts_at', '<=', Carbon::now())
             ->where('status', self::OPEN)
             ->with('items.goods')
-            ->with(['items' => function ($query) {
-                $query->where('status', self::OPEN)->orderBy('id', 'desc');
-            }])
-            ->whereHas('items', function ($query) use ($id) {
-                return $query->where('groupon_id', $id);
+            ->whereHas('items', function ($query) use ($id){
+               return $query->where('groupon_id', $id)->where('status', self::OPEN)->orderBy('id', 'desc');
             })->first();
     }
 
