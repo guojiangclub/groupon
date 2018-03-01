@@ -12,6 +12,7 @@
 return [
 
     'models' => [
+        'product'=>'',
         'goods' => '',
         'order'=>'',
         'order_special_type'=>''

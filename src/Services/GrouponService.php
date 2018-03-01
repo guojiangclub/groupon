@@ -11,10 +11,9 @@
 
 namespace iBrand\Component\Groupon\Services;
 
-use ElementVip\Component\Product\Models\Product;
-use ElementVip\Shoppingcart\Item;
+use iBrand\Shoppingcart\Item;
 use iBrand\Component\Groupon\Models\GrouponItem;
-use  iBrand\Component\Groupon\Repositories\GrouponItemRepository;
+use iBrand\Component\Groupon\Repositories\GrouponItemRepository;
 use Illuminate\Support\Collection;
 
 class GrouponService
@@ -32,7 +31,7 @@ class GrouponService
         if (!$buys || !isset($buys['id'])) {
             throw new \Exception('拼团商品数据不存在');
         }
-        $goods = Product::find($buys['id']);
+        $goods = config('ibrand.groupon.models.product')::find($buys['id']);
 
         if (!$buys['groupon_goods_id'] || !isset($buys['qty']) || !$buys['total'] || !$goods || $goods->goods_id != $buys['groupon_goods_id'] || !isset($buys['price']) || !$groupon_item = $this->grouponItemRepository->CheckGrouponItemInfo($buys['groupon_item_id'], $buys['price'], $buys['groupon_goods_id'])) {
             throw new \Exception('拼团商品不存在或已结束');
@@ -65,6 +64,10 @@ class GrouponService
 
     public function makeCartItems($buys)
     {
+
+        if(count($buys)<=0){
+            return [];
+        }
         $cartItems = new Collection();
 
         $buys_new[] = $buys;

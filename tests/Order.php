@@ -18,4 +18,10 @@ class Order extends Model
     protected $table = 'el_order';
 
     protected $guarded = ['id'];
+
+    public function specialTypes()
+    {
+        return $this->hasMany(OrderSpecialType::class);
+    }
 }
+

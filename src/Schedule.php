@@ -12,21 +12,20 @@
 namespace iBrand\Component\Groupon;
 
 use Carbon\Carbon;
-use ElementVip\Component\Order\Models\Order;
-use ElementVip\Scheduling\Schedule\Scheduling;
+use iBrand\Scheduling\Scheduling;
 
 class Schedule extends Scheduling
 {
     public function schedule()
     {
         $this->schedule->call(function () {
-            $orders = Order::where('status', Order::STATUS_NEW)->where('type', Order::TYPE_GROUPON)->get();
+            $orders = config('ibrand.groupon.models.order')::where('status', config('ibrand.groupon.models.order')::STATUS_NEW)->where('type', config('ibrand.groupon.models.order')::TYPE_GROUPON)->get();
             if (count($orders) > 0) {
                 foreach ($orders as $order) {
                     if (isset($order->specialTypes()->first()->groupon_item->auto_close) and $delayTime = $order->specialTypes()->first()->groupon_item->auto_close) {
                         $delayTime = Carbon::now()->addMinute(-$delayTime);
                         if ($order->submit_time < $delayTime) {
-                            $order->status = Order::STATUS_CANCEL;
+                            $order->status = config('ibrand.groupon.models.order')::STATUS_CANCEL;
                             $order->completion_time = Carbon::now();
                             $order->cancel_reason = '拼团过期未付款';
                             $order->save();

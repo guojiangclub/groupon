@@ -13,15 +13,14 @@ namespace iBrand\Component\Groupon\Test;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Goods extends Model
+class Product extends Model
 {
-    protected $table = 'el_goods';
+    protected $table = 'el_goods_product';
 
     protected $guarded = ['id'];
 
-    public function products()
+    public function goods()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Goods::class);
     }
-
 }

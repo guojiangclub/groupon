@@ -47,7 +47,14 @@ abstract class BaseTest extends TestCase
 
         $this->grouponItemRepository = $this->app->make(\iBrand\Component\Groupon\Repositories\GrouponItemRepository::class);
 
+        $this->GrouponService = $this->app->make(\iBrand\Component\Groupon\Services\GrouponService::class);
+
+
         $this->seedGoods();
+
+        $this->seedOrders();
+
+        $this->seedProducts();
     }
 
     /**
@@ -65,6 +72,7 @@ abstract class BaseTest extends TestCase
 
         $app['config']->set('ibrand.groupon', require __DIR__ . '/../config/groupon.php');
         $app['config']->set('ibrand.groupon.models.goods', Goods::class);
+        $app['config']->set('ibrand.groupon.models.product', Product::class);
         $app['config']->set('ibrand.groupon.models.order_special_type', OrderSpecialType::class);
         $app['config']->set('ibrand.groupon.models.order', Order::class);
     }
@@ -87,7 +95,7 @@ abstract class BaseTest extends TestCase
             \Prettus\Repository\Providers\RepositoryServiceProvider::class,
             \Orchestra\Database\ConsoleServiceProvider::class,
             \iBrand\Scheduling\ServiceProvider::class,
-            \iBrand\Component\Groupon\GrouponServiceProvider::class,
+            \iBrand\Component\Groupon\GrouponServiceProvider::class
         ];
     }
 
@@ -100,4 +108,21 @@ abstract class BaseTest extends TestCase
         Goods::create(['name'=>'test2','sell_price'=>200]);
         Goods::create(['name'=>'test3','sell_price'=>300]);
     }
+
+    /**
+     * seed some Orders.
+     */
+    public function seedOrders(){
+        Order::create(['order_no'=>'Oxx001','type'=>8,'status'=>1]);
+        Order::create(['order_no'=>'Oxx002','type'=>8,'status'=>1]);
+        Order::create(['order_no'=>'Oxx003','type'=>8,'status'=>1]);
+        Order::create(['order_no'=>'Oxx004','type'=>8,'status'=>1]);
+        Order::create(['order_no'=>'Oxx005','type'=>0,'status'=>1]);
+    }
+
+    public function seedProducts(){
+
+        Product::create(['goods_id'=>1,'store_nums'=>10,'sku'=>'ATYC173032REG','sell_price'=>'999.00']);
+    }
+
 }

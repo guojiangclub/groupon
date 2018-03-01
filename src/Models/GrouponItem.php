@@ -61,11 +61,8 @@ class GrouponItem extends Model
     public function getSurplusNumberAttribute()
     {
         $num = $this->number - $this->sale_number;
-        if ($num <= 0) {
-            return 0;
-        }
 
-        return $num;
+        return $num>0?$num:0;
     }
 
     public function getStartsAtAttribute()
@@ -107,13 +104,11 @@ class GrouponItem extends Model
         if (2 == $this->status) {
             return true;
         }
-
-        if (Carbon::now() >= $this->groupon->starts_at and Carbon::now() <= $this->groupon->ends_at) {
+        if (Carbon::now() < $this->groupon->starts_at) {
             return false;
-        } elseif (Carbon::now() < $this->groupon->starts_at) {
+        } elseif (Carbon::now() >= $this->groupon->starts_at and Carbon::now() <= $this->groupon->ends_at) {
             return false;
         }
-
         return true;
     }
 
@@ -122,22 +117,25 @@ class GrouponItem extends Model
         if (isset($this->groupon->ends_at)) {
             return $this->groupon->ends_at;
         }
-
         return '';
     }
 
     public function getInitStatusAttribute()
     {
+
+        if (2 == $this->status) {
+            return self::SUCCESS;
+        }
+
         if (Carbon::now() >= $this->groupon->starts_at and Carbon::now() <= $this->groupon->ends_at) {
             if ($this->number <= $this->order_number) {
                 return self::CHANCE;
             }
-
             return self::ING;
+
         } elseif (Carbon::now() < $this->groupon->starts_at) {
+
             return self::UNING;
-        } elseif (2 == $this->status) {
-            return self::SUCCESS;
         }
 
         return self::INGED;
