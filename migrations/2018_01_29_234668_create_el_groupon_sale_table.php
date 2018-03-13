@@ -16,6 +16,7 @@ class CreateElGrouponSaleTable extends Migration
         Schema::create('el_groupon_sale', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
+            $table->integer('order_id');
             $table->integer('groupon_item_id');
             $table->integer('quantity');
             $table->index(['user_id', 'groupon_item_id']);

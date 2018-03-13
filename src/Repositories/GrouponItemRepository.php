@@ -61,7 +61,7 @@ class GrouponItemRepository extends BaseRepository
 
 
     /**
-     * get
+     * get all active groupon items.
      * @param $limit
      */
     public function findActive($limit)
@@ -80,6 +80,23 @@ class GrouponItemRepository extends BaseRepository
             ->with('goods')
             ->orderBy('sort', 'desc')
             ->paginate($limit);
+    }
+
+    /**
+     * get active item by item's id.
+     * @param $id
+     * @return mixed
+     */
+    public function findActiveById($id)
+    {
+        return $this->model
+            ->where('id', $id)
+            ->where('status', self::OPEN)
+            ->whereHas('groupon', function ($query) {
+                return $query->where('status', self::OPEN)->where('ends_at', '>=', Carbon::now())
+                    ->where('starts_at', '<=', Carbon::now());
+            })
+            ->first();
     }
 
     /**
