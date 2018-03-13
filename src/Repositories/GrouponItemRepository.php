@@ -33,6 +33,7 @@ class GrouponItemRepository extends BaseRepository
         return GrouponItem::class;
     }
 
+
     /**
      * 获取全部未过期的有效拼团活动列表.
      *
@@ -53,6 +54,29 @@ class GrouponItemRepository extends BaseRepository
             ->with(['SpecialType' => function ($query) {
                 return $query->where('origin_type', 'groupon_item')->with('order');
             }])
+            ->with('goods')
+            ->orderBy('sort', 'desc')
+            ->paginate($limit);
+    }
+
+
+    /**
+     * get
+     * @param $limit
+     */
+    public function findActive($limit)
+    {
+        return $this->model
+            ->where('status', self::OPEN)
+            ->with(['groupon' => function ($query) {
+                $query->where('status', self::OPEN);
+            }])
+            ->whereHas('groupon', function ($query) {
+                return $query->where('status', self::OPEN)->where('ends_at', '>=', Carbon::now());
+            })
+            /*->with(['SpecialType' => function ($query) {
+                return $query->where('origin_type', 'groupon_item')->with('order');
+            }])*/
             ->with('goods')
             ->orderBy('sort', 'desc')
             ->paginate($limit);

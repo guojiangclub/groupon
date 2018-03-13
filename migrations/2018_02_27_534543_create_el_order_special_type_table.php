@@ -19,6 +19,7 @@ class CreateElOrderSpecialTypeTable extends Migration
      */
     public function up()
     {
+
         Schema::create('el_order_special_type', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('order_id');

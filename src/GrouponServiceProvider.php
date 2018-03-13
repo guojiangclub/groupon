@@ -48,7 +48,7 @@ class GrouponServiceProvider extends ServiceProvider
             __DIR__.'/../config/groupon.php', 'ibrand.groupon'
         );
 
-        $this->app->make('iBrand\Scheduling\ScheduleList')->add(Schedule::class);
+        //$this->app->make('iBrand\Scheduling\ScheduleList')->add(Schedule::class);
        
 
     }
