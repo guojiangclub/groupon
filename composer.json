@@ -17,14 +17,12 @@
   "require": {
     "php": ">=7.0",
     "prettus/l5-repository": "^2.1",
-    "ibrand/laravel-shopping-cart": "^1.2",
-    "ibrand/laravel-scheduling": "^1.0"
+    "ibrand/laravel-shopping-cart": "~1.0",
+    "ibrand/laravel-scheduling": "~1.0"
   },
   "require-dev": {
-    "mockery/mockery": "~0.9",
-    "phpunit/phpunit": "~5.7",
-    "orchestra/testbench": "~3.3",
-    "orchestra/database": "~3.3"
+    "orchestra/testbench": "~3.5",
+    "orchestra/database": "~3.5"
   },
   "autoload": {
     "psr-4": {
